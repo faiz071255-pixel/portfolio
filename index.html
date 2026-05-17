@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faiz Al-Omari · IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060910;
+    --surface: #0d1117;
+    --card: #111820;
+    --border: #1c2a3a;
+    --border2: #243040;
+    --accent: #38bdf8;
+    --accent2: #0ea5e9;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --purple: #8b5cf6;
+    --text: #f0f6fc;
+    --muted: #8b949e;
+    --dim: #3d4f61;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    padding: 2.5rem 1rem 3rem;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(56,189,248,0.07) 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 80%, rgba(139,92,246,0.06) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.03) 0%, transparent 60%);
+  }
+  .container { max-width: 820px; margin: 0 auto; }
+  .hero {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    animation: rise 0.7s cubic-bezier(.22,1,.36,1) both;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(56,189,248,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--accent), var(--green));
+  }
+  .hero-grid { display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+  .avatar-wrap { position: relative; flex-shrink: 0; }
+  .avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3a5f, #0c4a6e);
+    border: 2px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 0 30px rgba(56,189,248,0.15), 0 0 60px rgba(56,189,248,0.05);
+  }
+  .online-dot {
+    position: absolute; bottom: 4px; right: 4px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 2px solid var(--surface);
+    animation: blink 2s ease infinite;
+  }
+  .hero-info { flex: 1; min-width: 200px; }
+  .name {
+    font-size: 1.9rem; font-weight: 800; line-height: 1.1;
+    background: linear-gradient(90deg, #fff 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 0.3rem;
+  }
+  .name-ar { font-size: 0.8rem; color: var(--muted); font-family: 'Fira Code', monospace; margin-bottom: 0.5rem; }
+  .title-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .chip { font-size: 0.68rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .chip-blue { background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25); color: var(--accent); }
+  .chip-gold { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); color: var(--gold); }
+  .chip-green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); color: var(--green); }
+  .chip-purple { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.25); color: var(--purple); }
+  .bio { font-size: 0.85rem; color: var(--muted); line-height: 1.75; border-left: 2px solid var(--accent2); padding-left: 0.9rem; margin-bottom: 1.3rem; }
+  .contact-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .clink { display: inline-flex; align-items: center; gap: 0.45rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border2); border-radius: 8px; padding: 5px 12px; font-size: 0.73rem; color: var(--text); text-decoration: none; font-family: 'Fira Code', monospace; transition: all 0.2s; }
+  .clink:hover { border-color: var(--accent); color: var(--accent); background: rgba(56,189,248,0.05); }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 1.2rem; overflow: hidden; animation: rise 0.7s cubic-bezier(.22,1,.36,1) both; }
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.16s; }
+  .section:nth-child(4) { animation-delay: 0.24s; }
+  .section:nth-child(5) { animation-delay: 0.32s; }
+  .sh { display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--border); font-weight: 700; font-size: 0.9rem; }
+  .sb { padding: 1.3rem 1.5rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; }
+  .sk { background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; transition: all 0.2s; }
+  .sk:hover { transform: translateY(-2px); border-color: var(--accent); background: rgba(56,189,248,0.05); }
+  .sk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .d-blue { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+  .d-gold { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+  .d-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .d-purple { background: var(--purple); box-shadow: 0 0 6px var(--purple); }
+  .cert-card { display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02)); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px; padding: 1rem 1.3rem; }
+  .cert-badge { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #78350f, #92400e); border: 2px solid rgba(245,158,11,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .cert-name { font-weight: 700; font-size: 1rem; color: var(--gold); }
+  .cert-desc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .proj { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; margin-bottom: 0.8rem; transition: border-color 0.2s; }
+  .proj:hover { border-color: rgba(56,189,248,0.3); }
+  .proj-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; flex-wrap: wrap; gap: 0.4rem; }
+  .proj-title { font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem; }
+  .proj-title::before { content: '▸'; color: var(--accent); }
+  .proj-tag { font-size: 0.62rem; font-family: 'Fira Code', monospace; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15); color: var(--accent); padding: 2px 8px; border-radius: 4px; }
+  .proj ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+  .proj li { font-size: 0.77rem; color: var(--muted); padding-left: 1.1rem; position: relative; line-height: 1.6; }
+  .proj li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 0.68rem; top: 3px; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; }
+  @media (max-width: 500px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat { text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 0.5rem; }
+  .stat-n { font-weight: 800; font-size: 1.5rem; background: linear-gradient(90deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-l { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; font-family: 'Fira Code', monospace; }
+  .footer { text-align: center; font-size: 0.65rem; color: var(--dim); margin-top: 2rem; font-family: 'Fira Code', monospace; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-grid">
+      <div class="avatar-wrap">
+        <div class="avatar">👨‍💻</div>
+        <div class="online-dot"></div>
+      </div>
+      <div class="hero-info">
+        <div class="name">Faiz Al-Omari</div>
+        <div class="name-ar">فايز محمد علي العمري</div>
+        <div class="title-row">
+          <span class="chip chip-blue">IT Support</span>
+          <span class="chip chip-gold">CCNA Certified</span>
+          <span class="chip chip-green">Open to Work</span>
+          <span class="chip chip-purple">CS Graduate</span>
+        </div>
+        <p class="bio">Computer Science graduate with a strong foundation in networking, IT support, and hands-on home lab experience. Holding a CCNA certification and passionate about solving technical challenges and delivering exceptional Help Desk support.</p>
+        <div class="contact-row">
+          <a href="mailto:faiz071255@gmail.com" class="clink"><span>📧</span> faiz071255@gmail.com</a>
+          <a href="tel:0551291028" class="clink"><span>📱</span> 0551291028</a>
+          <a href="https://www.linkedin.com/in/faiz-alomari-46484819b" target="_blank" class="clink"><span>💼</span> LinkedIn</a>
+          <a href="https://github.com/faiz071255-pixel" target="_blank" class="clink"><span>🐙</span> GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sh"><span>🏆</span> Certification</div>
+    <div class="sb">
+      <div class="cert-card">
+        <div class="cert-badge">🌐</div>
+        <div class="cert-info">
+          <div class="cert-name">Cisco CCNA</div>
+          <div class="cert-desc">Cisco Certified Network Associate · Routing & Switching · Network Fundamentals<br>Subnetting · VLANs · OSPF · ACLs · Network Security Basics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sh"><span>⚡</span> Technical Skills</div>
+    <div class="sb">
+      <div class="skills-grid">
+        <div class="sk"><div class="sk-dot d-gold"></div> Cisco CCNA</div>
+        <div class="sk"><div class="sk-dot d-blue"></div> Networking</div>
+        <div class="sk"><div class="sk-dot d-blue"></div> Windows OS</div>
+        <div class="sk"><div class="sk-dot d-green"></div> Linux Basics</div>
+        <div class="sk"><div class="sk-dot d-purple"></div> VirtualBox</div>
+        <div class="sk"><div class="sk-dot d-green"></div> Troubleshooting</div>
+        <div class="sk"><div class="sk-dot d-blue"></div> TCP/IP</div>
+        <div class="sk"><div class="sk-dot d-gold"></div> Subnetting</div>
+        <div class="sk"><div class="sk-dot d-purple"></div> VLANs</div>
+        <div class="sk"><div class="sk-dot d-green"></div> Help Desk</div>
+        <div class="sk"><div class="sk-dot d-blue"></div> Technical Support</div>
+        <div class="sk"><div class="sk-dot d-gold"></div> OSPF / ACLs</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sh"><span>🛠️</span> Home Lab Projects</div>
+    <div class="sb">
+      <div class="proj">
+        <div class="proj-head"><div class="proj-title">Virtual Machine Lab</div><span class="proj-tag">VirtualBox · Windows · Linux</span></div>
+        <ul>
+          <li>Deployed Windows 10 and Ubuntu Linux VMs using VirtualBox on personal hardware</li>
+          <li>Configured network adapters (NAT, Bridged, Host-only) to simulate different environments</li>
+          <li>Practiced system administration, user management, and service configuration</li>
+          <li>Documented issues and resolutions to build a personal knowledge base</li>
+        </ul>
+      </div>
+      <div class="proj">
+        <div class="proj-head"><div class="proj-title">Network Connectivity Lab</div><span class="proj-tag">CLI · ping · nslookup · ipconfig</span></div>
+        <ul>
+          <li>Tested and diagnosed network connectivity using ping, tracert, ipconfig, and nslookup</li>
+          <li>Simulated common network issues and practiced systematic troubleshooting approaches</li>
+          <li>Analyzed packet flow and identified bottlenecks using Wireshark basics</li>
+        </ul>
+      </div>
+      <div class="proj">
+        <div class="proj-head"><div class="proj-title">Cisco Packet Tracer Simulations</div><span class="proj-tag">Packet Tracer · CCNA · Routing</span></div>
+        <ul>
+          <li>Built multi-router topologies with OSPF and static routing configurations</li>
+          <li>Configured VLANs and inter-VLAN routing on Layer 3 switches</li>
+          <li>Applied Access Control Lists (ACLs) to control network traffic</li>
+          <li>Simulated real-world enterprise network scenarios for CCNA preparation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sh"><span>📊</span> Overview</div>
+    <div class="sb">
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">1</div><div class="stat-l">Certification</div></div>
+        <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Lab Projects</div></div>
+        <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Skills</div></div>
+        <div class="stat"><div class="stat-n">CS</div><div class="stat-l">Degree</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Faiz Al-Omari · IT Portfolio · <a href="https://github.com/faiz071255-pixel" target="_blank">github.com/faiz071255-pixel</a> · 2025</div>
+</div>
+</body>
+</html>
